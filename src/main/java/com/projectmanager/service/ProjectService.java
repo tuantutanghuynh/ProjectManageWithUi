@@ -73,6 +73,47 @@ public class ProjectService<T extends Task> implements IProjectAnalytics {
     return worker;
 }
 
+//------------ADD TASK
+public boolean Add(T task){
+    try{
+        if(task==null){
+            throw new NullPointerException("Task khong duoc null");
+        }
+        if(map.containsKey(task.id)){
+            throw new IllegalAccessException("ID \"" + task.id + "\" da ton tai");
+        }
+        if (!repo.insert(task)){
+            throw new RuntimeException("Luu xuong DB that bai");
+        }
+
+        synchronized (lock) {
+            map.put(task.id, task);
+            list.add(task);
+        }
+        return true;
+    }catch (Exception e){
+        System.out.println("[ERROR]" + e.getMessage());
+        return false;
+    }finally {
+        System.out.println("[LOG] Them task ket thuc");
+    }
+}
+
+//------------Delete
+public boolean delete(String id){
+    synchronized(lock){
+        T task = map.get(id);
+        if (task == null){
+            return false;
+        }
+        if(!repo.delete(id)){
+            return false;
+        }
+        list.remove(task);
+        map.remove(id);
+    }
+    return true;
+}
 
     @Override
     public Map<String, Integer> countByPriority() {

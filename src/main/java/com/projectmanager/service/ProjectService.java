@@ -7,9 +7,10 @@ package com.projectmanager.service;
 import com.projectmanager.models.IProjectAnalytics;
 import com.projectmanager.models.Task;
 import com.projectmanager.repository.TaskRepository;
-import java.util.HashMap;
+
 import java.util.*;
-import java.util.Map;
+import java.util.function.Consumer;
+
 import javafx.application.Platform;
 
 /**
@@ -80,7 +81,7 @@ public boolean Add(T task){
             throw new NullPointerException("Task khong duoc null");
         }
         if(map.containsKey(task.id)){
-            throw new IllegalAccessException("ID \"" + task.id + "\" da ton tai");
+            throw new IllegalArgumentException("ID \"" + task.id + "\" da ton tai");
         }
         if (!repo.insert(task)){
             throw new RuntimeException("Luu xuong DB that bai");
@@ -113,6 +114,77 @@ public boolean delete(String id){
         map.remove(id);
     }
     return true;
+}
+
+
+//-------UPDATE Status---------
+public boolean updateStatus(String id, String newStatus){
+    T task = map.get(id);
+    if(task == null){
+        return false;
+    }
+    if(!repo.updateStatus(id, newStatus)){
+        return false;
+    }
+    task.status = newStatus;
+    return true;
+}
+
+//---------Query
+public T findById(String id){
+    synchronized(lock){
+        return map.get(id);
+    }
+}
+
+public List<T> getAll(){
+    synchronized(lock){
+        return new ArrayList<>(list);
+    }
+}
+
+//------------Filter----
+//filterByStatusL:
+public List<T> FilterByStatus(String status){
+    if (status == null || status.isBlank()){
+        return getAll();
+    }
+    List<T> result = new ArrayList<>();
+    for (T t: getAll()){
+        if(status.equalsIgnoreCase(t.status)){
+            result.add(t);
+        }
+    }
+    return result;
+}
+
+//filter by type:
+public List<T> filterByType(String typeCode){
+    if(typeCode ==  null || typeCode.isBlank()){
+        return getAll();
+    }
+    List<T> result = new ArrayList<>();
+    for (T t : getAll()){
+        if(t.getTypeCode().equalsIgnoreCase(typeCode)){
+            result.add(t);
+        }
+    }
+    return result;
+}
+
+//total effort async---------------
+public Thread totalEffortAsync(Consumer<Integer> onResult){
+    Thread worker = new Thread(() -> {
+        int total = 0;
+        for (T t : getAll()) {
+            total += t.GetEffort();
+        }
+        final int result = total;
+        Platform.runLater(() -> onResult.accept(result));
+    }, "effort-thread");
+    worker.setDaemon(true);
+    worker.start();
+    return worker;
 }
 
     @Override

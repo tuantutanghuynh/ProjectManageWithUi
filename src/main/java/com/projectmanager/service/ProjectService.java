@@ -187,6 +187,32 @@ public Thread totalEffortAsync(Consumer<Integer> onResult){
     return worker;
 }
 
+//two pointer: reverse list
+public void reverseOrder(){
+    synchronized (lock){
+        int i = 0, j = list.size() -1;
+        while (i<j){
+            T temp =  list.get(i);
+            list.set(i, list.get(j));
+            list.set(j, temp);
+            i++; 
+            j--;
+        }
+    }
+}
+
+////leatcode #127
+public List<String> findDuplicateIds(){
+    Set<String> seen = new HashSet<>();
+    List<String> dups = new ArrayList<>();
+    for(T t : getAll()){
+        if(!seen.add(t.id.toLowerCase()) && !dups.contains(t.id)){
+            dups.add(t.id);
+        }
+    }
+    return dups;
+}
+
     @Override
     public Map<String, Integer> countByPriority() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

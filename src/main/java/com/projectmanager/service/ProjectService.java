@@ -7,6 +7,8 @@ package com.projectmanager.service;
 import com.projectmanager.models.IProjectAnalytics;
 import com.projectmanager.models.Task;
 import com.projectmanager.repository.TaskRepository;
+import com.projectmanager.models.Bug;
+import com.projectmanager.models.Feature;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -215,18 +217,39 @@ public List<String> findDuplicateIds(){
 
     @Override
     public Map<String, Integer> countByPriority() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Map<String, Integer> result = new LinkedHashMap<>();
+        for (T t : getAll()){
+            result.put(t.priority, result.getOrDefault(t.priority,0 ) + 1);
+        }
+        return result;
     }
 
     @Override
     public Map<String, Integer> countByStatus() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       Map<String, Integer> result = new LinkedHashMap<>();
+       for (T t : getAll()){
+            result.put(t.status,result.getOrDefault(t.status, 0) + 1);
+       }
+       return result;
     }
 
     @Override
     public void showSummary() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("=".repeat(50));
+        System.out.println("   TONG KET DU AN - " + list.size() + " task");
+        System.out.println("[ Priority ]");
+        countByPriority().forEach((k, v) -> System.out.printf("  %-8s: %d%n", k, v));
+        System.out.println("[ Status ]");
+        countByStatus().forEach((k, v) -> System.out.printf("  %-12s: %d%n", k, v));
+        System.out.println("=".repeat(50));
     }
     
+    
+    
+    // Tien ich cho DashboardController
+    public int countBugs()     { return (int) getAll().stream().filter(t -> t instanceof Bug).count(); }
+    public int countFeatures() { return (int) getAll().stream().filter(t -> t instanceof Feature).count(); }
+    public int totalEffort()   { int s = 0; for (T t : getAll()) s += t.GetEffort(); return s; }
+    public int getSize()       { return list.size(); }
     
 }

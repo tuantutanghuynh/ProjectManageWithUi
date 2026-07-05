@@ -22,4 +22,9 @@ public class UserSession {
    public static boolean isAdmin(){
     return currentUser != null && "admin".equals(currentUser.role);
    }
+
+   public static boolean isLoggedIn() { 
+    return currentUser != null; 
+}
+
 }

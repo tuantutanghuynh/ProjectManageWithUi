@@ -1,76 +1,76 @@
 # ProjectManagerApp
 
-Ứng dụng desktop quản lý dự án (Bug/Feature) viết bằng **Java 21 + JavaFX**, kết nối **SQL Server** qua JDBC. Có phân quyền User/Admin, đăng nhập/đăng ký, thêm/sửa/xóa task, thống kê theo priority/status.
+A desktop project management application (Bug/Feature tracking) built with **Java 21 + JavaFX**, connected to **SQL Server** via JDBC. Supports User/Admin roles, login/registration, task creation/editing/deletion, and statistics by priority/status.
 
-> Dự án học tập — áp dụng OOP, Design Patterns (Singleton, Factory), Generics, Exception Handling, Multithreading, JDBC.
+> Learning project — applying OOP, Design Patterns (Singleton, Factory), Generics, Exception Handling, Multithreading, JDBC.
 
-## Công nghệ sử dụng
+## Tech Stack
 
-| Thành phần | Phiên bản |
+| Component | Version |
 |---|---|
 | Java (JDK) | 21 |
 | JavaFX | 21.0.10 |
 | Maven | javafx-maven-plugin |
 | Database | SQL Server (JDBC driver `mssql-jdbc` 13.4.0.jre11) |
 
-## Cấu trúc thư mục
+## Project Structure
 
 ```
 src/main/java/com/projectmanager/
-├── MainApp.java                # Entry point JavaFX
-├── config/DatabaseConfig.java  # Kết nối SQL Server
+├── MainApp.java                # JavaFX entry point
+├── config/DatabaseConfig.java  # SQL Server connection
 ├── exceptions/AppException.java
-├── factory/TaskFactory.java    # Factory Pattern: tạo Bug/Feature
+├── factory/TaskFactory.java    # Factory Pattern: creates Bug/Feature
 ├── models/                     # Task, Bug, Feature + interfaces (ITask, IAssignable, ISeverityRatable, IPersistable, IProjectAnalytics)
 │   ├── dto/LoginRequest.java
 │   └── entity/User.java
-├── repository/                 # TaskRepository, UserRepository — thao tác DB
+├── repository/                 # TaskRepository, UserRepository — DB operations
 ├── service/                    # AuthService (login/register), ProjectService (Singleton + Generic)
-├── session/UserSession.java    # Giữ trạng thái đăng nhập (Singleton)
+├── session/UserSession.java    # Holds login state (Singleton)
 ├── ui/
-│   ├── SceneSwitcher.java      # Chuyển màn hình FXML
-│   └── controllers/            # Controller cho từng màn hình FXML
+│   ├── SceneSwitcher.java      # FXML scene navigation
+│   └── controllers/            # Controller for each FXML screen
 └── utils/                      # PasswordHasher (SHA-256), Validator
 ```
 
-## Yêu cầu môi trường
+## Requirements
 
-- JDK 21 (khuyến nghị Homebrew: `brew install openjdk@21`)
+- JDK 21 (recommended via Homebrew: `brew install openjdk@21`)
 - Maven 3.9+
-- SQL Server đang chạy tại `localhost:1433`, database tên `ProjectManagerDB`
+- SQL Server running at `localhost:1433`, database named `ProjectManagerDB`
 
-Set `JAVA_HOME` trỏ đúng JDK 21 trước khi build (project pin `maven.compiler.release=21`):
+Set `JAVA_HOME` to JDK 21 before building (project pins `maven.compiler.release=21`):
 
 ```bash
 export JAVA_HOME="/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
 ```
 
-## Cài đặt & chạy
+## Setup & Run
 
 ```bash
-mvn compile          # tải dependency + build
-mvn javafx:run        # chạy ứng dụng
+mvn compile          # download dependencies + build
+mvn javafx:run       # run the application
 ```
 
-Thông tin kết nối DB khai báo tại [`DatabaseConfig.java`](src/main/java/com/projectmanager/config/DatabaseConfig.java) — cập nhật `URL`/`USER`/`PASSWORD` theo môi trường của bạn trước khi chạy.
+Database connection details are declared in [`DatabaseConfig.java`](src/main/java/com/projectmanager/config/DatabaseConfig.java) — update `URL`/`USER`/`PASSWORD` to match your environment before running.
 
-## Tiến độ
+## Progress
 
-| Bước | Nội dung | Trạng thái |
+| Step | Description | Status |
 |---|---|---|
-| 00 | Setup project (Maven + JavaFX) | ✅ |
+| 00 | Project setup (Maven + JavaFX) | ✅ |
 | 01 | Core Models (Task, Bug, Feature, interfaces) | ✅ |
 | 02 | Data Layer (Repository, DatabaseConfig) | ✅ |
 | 03 | Service (TaskFactory, AuthService, ProjectService) | ✅ |
 | 04 | Utils / Session / Exception | ✅ |
-| 05 | Controllers | 🚧 Đang làm — SceneSwitcher, LoginController xong; còn Register/Dashboard/AddTask/TaskList/UserList |
-| 06 | FXML + CSS (giao diện) | ⏳ Chưa bắt đầu |
+| 05 | Controllers | 🚧 In progress — SceneSwitcher, LoginController done; Register/Dashboard/AddTask/TaskList/UserList remaining |
+| 06 | FXML + CSS (UI) | ⏳ Not started |
 
-## Tính năng dự kiến
+## Planned Features
 
-- Đăng nhập / Đăng ký tài khoản, mật khẩu hash SHA-256
-- Phân quyền User / Admin (Admin quản lý user, xóa task)
-- Thêm Bug / Feature qua Factory Pattern
-- Danh sách task: lọc theo status/type, cập nhật status, xóa (admin)
-- Dashboard thống kê: tổng effort, số lượng theo priority/status
-- Load dữ liệu bất đồng bộ (background thread) để không đứng UI
+- Login / Registration with SHA-256 password hashing
+- User / Admin role separation (Admin manages users, deletes tasks)
+- Add Bug / Feature via Factory Pattern
+- Task list: filter by status/type, update status, delete (admin only)
+- Dashboard statistics: total effort, count by priority/status
+- Asynchronous data loading (background thread) to keep UI responsive

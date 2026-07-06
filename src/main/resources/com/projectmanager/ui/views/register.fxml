@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import java.lang.String?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.projectmanager.ui.controllers.RegisterController"
+      alignment="CENTER" spacing="12"
+      prefWidth="440" prefHeight="580"
+      styleClass="neo-root">
+    <stylesheets>
+        <String fx:value="/com/projectmanager/ui/styles/main.css"/>
+    </stylesheets>
+
+    <!-- Header -->
+    <VBox alignment="CENTER" spacing="4">
+        <padding><Insets bottom="6"/></padding>
+        <Label text="Project Manager" styleClass="neo-title"/>
+        <Label text="Tạo tài khoản mới" styleClass="neo-subtitle"/>
+    </VBox>
+
+    <!-- Register card -->
+    <VBox styleClass="neo-card" spacing="11" maxWidth="360" alignment="CENTER_LEFT">
+        <padding><Insets top="26" right="32" bottom="26" left="32"/></padding>
+
+        <Label text="Đăng ký" styleClass="neo-section"/>
+
+        <VBox spacing="4">
+            <Label text="TÊN ĐĂNG NHẬP  (tối thiểu 3 ký tự)" styleClass="neo-field-label"/>
+            <TextField fx:id="txtUsername" promptText="username"
+                       styleClass="neo-input" maxWidth="Infinity"/>
+        </VBox>
+
+        <VBox spacing="4">
+            <Label text="MẬT KHẨU  (tối thiểu 6 ký tự)" styleClass="neo-field-label"/>
+            <PasswordField fx:id="txtPassword" promptText="••••••••"
+                           styleClass="neo-input" maxWidth="Infinity"/>
+        </VBox>
+
+        <VBox spacing="4">
+            <Label text="XÁC NHẬN MẬT KHẨU" styleClass="neo-field-label"/>
+            <PasswordField fx:id="txtConfirm" promptText="nhập lại mật khẩu"
+                           styleClass="neo-input" maxWidth="Infinity"/>
+        </VBox>
+
+        <VBox spacing="4">
+            <Label text="EMAIL  (không bắt buộc)" styleClass="neo-field-label"/>
+            <TextField fx:id="txtEmail" promptText="email@example.com"
+                       styleClass="neo-input" maxWidth="Infinity"/>
+        </VBox>
+
+        <VBox spacing="4">
+            <Label text="VAI TRÒ" styleClass="neo-field-label"/>
+            <ComboBox fx:id="cbRole" styleClass="neo-combo" maxWidth="Infinity"/>
+        </VBox>
+
+        <Label fx:id="lblMessage" text="" wrapText="true" maxWidth="296"
+               style="-fx-font-size: 12px; -fx-font-style: italic;"/>
+
+        <Button text="Tạo tài khoản" onAction="#handleRegister"
+                styleClass="btn-primary" maxWidth="Infinity"/>
+
+        <Button text="Đã có tài khoản? Đăng nhập" onAction="#goLogin"
+                styleClass="btn-flat" maxWidth="Infinity"
+                style="-fx-alignment: CENTER;"/>
+    </VBox>
+</VBox>

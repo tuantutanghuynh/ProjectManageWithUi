@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import java.lang.String?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.projectmanager.ui.controllers.DashboardController"
+      spacing="20" prefWidth="640" prefHeight="520"
+      styleClass="neo-root">
+    <stylesheets>
+        <String fx:value="/com/projectmanager/ui/styles/main.css"/>
+    </stylesheets>
+    <padding><Insets top="32" right="48" bottom="32" left="48"/></padding>
+
+    <!-- Top bar: App name + user info -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label text="Project Manager" styleClass="neo-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <VBox alignment="CENTER_RIGHT" spacing="2">
+            <Label fx:id="lblWelcome" text="..." styleClass="neo-welcome"
+                   style="-fx-font-size: 14px;"/>
+            <Label fx:id="lblRole" text="..." styleClass="neo-role"/>
+        </VBox>
+    </HBox>
+
+    <!-- Stats card -->
+    <VBox styleClass="neo-card" spacing="8">
+        <padding><Insets top="18" right="20" bottom="18" left="20"/></padding>
+        <Label text="TỔNG QUAN DỰ ÁN" styleClass="neo-field-label"/>
+        <Label fx:id="lblStats" text="Đang tải dữ liệu..."
+               styleClass="neo-stats" wrapText="true"/>
+    </VBox>
+
+    <!-- Navigation label -->
+    <Label text="THAO TÁC" styleClass="neo-field-label"/>
+
+    <!-- Action buttons grid 2x2 -->
+    <GridPane hgap="14" vgap="14">
+        <Button text="+ Thêm Task Mới" onAction="#goAddTask"
+                styleClass="btn-primary" prefWidth="256" prefHeight="50"
+                GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Button text="≡  Danh Sách Task" onAction="#goTaskList"
+                styleClass="btn-cyan" prefWidth="256" prefHeight="50"
+                GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Button fx:id="btnManageUsers"
+                text="Quản Lý Người Dùng" onAction="#goManageUsers"
+                styleClass="btn-purple" prefWidth="256" prefHeight="50"
+                GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <Button text="Đăng Xuất" onAction="#handleLogout"
+                styleClass="btn-ghost-pink" prefWidth="256" prefHeight="50"
+                GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    </GridPane>
+</VBox>

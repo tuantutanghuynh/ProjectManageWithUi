@@ -90,7 +90,7 @@ public class UserRepository {
         u.username = rs.getString("Username");
         u.passwordHash = rs.getString("PasswordHash");
         u.email = rs.getString("Email");
-        u.role = rs.getNString("Role");
+        u.role = rs.getString("Role");
         u.status = rs.getBoolean("Status");
         return u;
     }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import java.lang.String?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.projectmanager.ui.controllers.AddTaskController"
+      alignment="CENTER" spacing="16"
+      prefWidth="520" prefHeight="570"
+      styleClass="neo-root">
+    <stylesheets>
+        <String fx:value="/com/projectmanager/ui/styles/main.css"/>
+    </stylesheets>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="12" maxWidth="440">
+        <Button text="← Quay lại" onAction="#goBack" styleClass="btn-ghost"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label text="Thêm Task Mới" styleClass="neo-title"
+               style="-fx-font-size: 18px;"/>
+    </HBox>
+
+    <!-- Form card -->
+    <VBox styleClass="neo-card" spacing="12" maxWidth="440" alignment="CENTER_LEFT">
+        <padding><Insets top="24" right="28" bottom="24" left="28"/></padding>
+
+        <!-- ID + Title -->
+        <HBox spacing="14">
+            <VBox spacing="4" prefWidth="140">
+                <Label text="TASK ID" styleClass="neo-field-label"/>
+                <TextField fx:id="txtId" promptText="VD: BUG-001"
+                           styleClass="neo-input"/>
+            </VBox>
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="TIÊU ĐỀ" styleClass="neo-field-label"/>
+                <TextField fx:id="txtTitle" promptText="Mô tả ngắn gọn..."
+                           styleClass="neo-input" maxWidth="Infinity"/>
+            </VBox>
+        </HBox>
+
+        <!-- Priority + Status -->
+        <HBox spacing="14">
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="PRIORITY" styleClass="neo-field-label"/>
+                <ComboBox fx:id="cbPriority" styleClass="neo-combo" maxWidth="Infinity"/>
+            </VBox>
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="STATUS" styleClass="neo-field-label"/>
+                <ComboBox fx:id="cbStatus" styleClass="neo-combo" maxWidth="Infinity"/>
+            </VBox>
+        </HBox>
+
+        <!-- Type selector -->
+        <VBox spacing="6">
+            <Label text="LOẠI TASK" styleClass="neo-field-label"/>
+            <HBox spacing="10">
+                <ToggleButton fx:id="btnBug"     text="Bug"     styleClass="toggle-type"/>
+                <ToggleButton fx:id="btnFeature" text="Feature" styleClass="toggle-type"/>
+            </HBox>
+        </VBox>
+
+        <!-- Bug-only: Severity -->
+        <HBox fx:id="rowSeverity" spacing="14" alignment="CENTER_LEFT">
+            <Label text="SEVERITY" styleClass="neo-field-label" minWidth="90"/>
+            <ComboBox fx:id="cbSeverity" styleClass="neo-combo" prefWidth="200"/>
+        </HBox>
+
+        <!-- Feature-only: Hours + Developer -->
+        <HBox fx:id="rowHours" spacing="14" alignment="CENTER_LEFT">
+            <Label text="GIỜ DỰ KIẾN" styleClass="neo-field-label" minWidth="90"/>
+            <TextField fx:id="txtHours" promptText="VD: 8"
+                       styleClass="neo-input" prefWidth="200"/>
+        </HBox>
+        <HBox fx:id="rowDeveloper" spacing="14" alignment="CENTER_LEFT">
+            <Label text="DEVELOPER" styleClass="neo-field-label" minWidth="90"/>
+            <TextField fx:id="txtDeveloper" promptText="tên developer (tuỳ chọn)"
+                       styleClass="neo-input" prefWidth="200"/>
+        </HBox>
+
+        <!-- Message + Action -->
+        <Label fx:id="lblMessage" text="" wrapText="true" maxWidth="384"
+               style="-fx-font-size: 12px; -fx-font-style: italic;"/>
+
+        <Button text="Thêm Task" onAction="#handleAdd"
+                styleClass="btn-primary" maxWidth="Infinity"/>
+    </VBox>
+</VBox>

@@ -16,12 +16,8 @@ public class AuthService {
         Validator.requireNonBlank(req.password, "Mat khau");
 
         User u = userRepo.findByUsername(req.username);
-        if( u == null){
-            return null;
-        }
-        if(!PasswordHasher.verify(req.password, u.passwordHash)){
-            return null;
-        }
+        if (u == null) return null;
+        if (!PasswordHasher.verify(req.password, u.passwordHash)) return null;
         return u;
     }
 

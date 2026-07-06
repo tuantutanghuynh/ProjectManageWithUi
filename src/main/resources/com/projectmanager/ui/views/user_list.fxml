@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import java.lang.String?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.projectmanager.ui.controllers.UserListController"
+      spacing="12" prefWidth="820" prefHeight="520"
+      styleClass="neo-root">
+    <stylesheets>
+        <String fx:value="/com/projectmanager/ui/styles/main.css"/>
+    </stylesheets>
+    <padding><Insets top="18" right="20" bottom="14" left="20"/></padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label text="Quản Lý Người Dùng" styleClass="neo-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Làm mới" onAction="#handleRefresh" styleClass="btn-ghost"/>
+        <Button text="← Dashboard" onAction="#goBack"    styleClass="btn-ghost"/>
+    </HBox>
+
+    <!-- Table -->
+    <TableView fx:id="tableView" styleClass="neo-table" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId"       text="ID"          prefWidth="55"/>
+            <TableColumn fx:id="colUsername" text="TÊN ĐĂNG NHẬP" prefWidth="190"/>
+            <TableColumn fx:id="colEmail"    text="EMAIL"        prefWidth="230"/>
+            <TableColumn fx:id="colRole"     text="VAI TRÒ"     prefWidth="100"/>
+            <TableColumn fx:id="colStatus"   text="TRẠNG THÁI"  prefWidth="120"/>
+        </columns>
+    </TableView>
+
+    <!-- Action bar -->
+    <HBox styleClass="neo-bar" spacing="14" alignment="CENTER_LEFT">
+        <Button text="Khoá / Mở khoá" onAction="#handleToggleStatus"
+                styleClass="btn-danger"/>
+        <Label text="Chọn 1 người dùng ở trên trước" styleClass="neo-field-label"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="lblMessage" text="" wrapText="true" maxWidth="340"
+               style="-fx-font-size: 12px; -fx-font-style: italic;"/>
+    </HBox>
+</VBox>

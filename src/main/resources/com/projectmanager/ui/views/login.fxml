@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import java.lang.String?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.projectmanager.ui.controllers.LoginController"
+      alignment="CENTER" spacing="12"
+      prefWidth="420" prefHeight="500"
+      styleClass="neo-root">
+    <stylesheets>
+        <String fx:value="/com/projectmanager/ui/styles/main.css"/>
+    </stylesheets>
+
+    <!-- Logo / App name -->
+    <VBox alignment="CENTER" spacing="4">
+        <padding><Insets bottom="8"/></padding>
+        <Label text="Project Manager" styleClass="neo-title"/>
+        <Label text="Quản lý dự án của bạn" styleClass="neo-subtitle"/>
+    </VBox>
+
+    <!-- Login card -->
+    <VBox styleClass="neo-card" spacing="12" maxWidth="340" alignment="CENTER_LEFT">
+        <padding><Insets top="28" right="32" bottom="28" left="32"/></padding>
+
+        <Label text="Đăng nhập" styleClass="neo-section"/>
+
+        <VBox spacing="4">
+            <Label text="TÊN ĐĂNG NHẬP" styleClass="neo-field-label"/>
+            <TextField fx:id="txtUsername" promptText="username"
+                       styleClass="neo-input" maxWidth="Infinity"/>
+        </VBox>
+
+        <VBox spacing="4">
+            <Label text="MẬT KHẨU" styleClass="neo-field-label"/>
+            <PasswordField fx:id="txtPassword" promptText="••••••••"
+                           styleClass="neo-input" maxWidth="Infinity"/>
+        </VBox>
+
+        <Label fx:id="lblMessage" text="" wrapText="true" maxWidth="276"
+               style="-fx-font-size: 12px; -fx-font-style: italic;"/>
+
+        <Button text="Đăng nhập" onAction="#handleLogin"
+                styleClass="btn-primary" maxWidth="Infinity"/>
+
+        <Button text="Chưa có tài khoản? Đăng ký" onAction="#goRegister"
+                styleClass="btn-flat" maxWidth="Infinity"
+                style="-fx-alignment: CENTER;"/>
+    </VBox>
+
+    <Label text="v1.0 — ProjectManager" styleClass="neo-footer"/>
+</VBox>

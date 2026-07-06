@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import java.lang.String?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.projectmanager.ui.controllers.TaskListController"
+      spacing="10" prefWidth="980" prefHeight="640"
+      styleClass="neo-root">
+    <stylesheets>
+        <String fx:value="/com/projectmanager/ui/styles/main.css"/>
+    </stylesheets>
+    <padding><Insets top="18" right="20" bottom="14" left="20"/></padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label text="Danh Sách Task" styleClass="neo-title"/>
+        <Label fx:id="lblStatus" text="" styleClass="neo-subtitle"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Tải lại" onAction="#handleReload" styleClass="btn-ghost"/>
+        <Button text="← Dashboard" onAction="#goBack"   styleClass="btn-ghost"/>
+    </HBox>
+
+    <!-- Table -->
+    <TableView fx:id="tableView" styleClass="neo-table" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colType"     text="LOẠI"     prefWidth="72"/>
+            <TableColumn fx:id="colId"       text="ID"       prefWidth="110"/>
+            <TableColumn fx:id="colTitle"    text="TIÊU ĐỀ"  prefWidth="250"/>
+            <TableColumn fx:id="colPriority" text="PRIORITY" prefWidth="90"/>
+            <TableColumn fx:id="colStatus"   text="STATUS"   prefWidth="110"/>
+            <TableColumn fx:id="colEffort"   text="EFFORT"   prefWidth="75"/>
+            <TableColumn fx:id="colExtra"    text="CHI TIẾT" prefWidth="200"/>
+        </columns>
+    </TableView>
+
+    <!-- Filter + action bar -->
+    <HBox styleClass="neo-bar" spacing="10" alignment="CENTER_LEFT">
+        <Label text="LỌC:" styleClass="neo-field-label"/>
+        <ComboBox fx:id="cbFilterStatus" styleClass="neo-combo" prefWidth="130"/>
+        <ComboBox fx:id="cbFilterType"   styleClass="neo-combo" prefWidth="110"/>
+        <Button text="Lọc"   onAction="#handleFilter"      styleClass="btn-primary"/>
+        <Button text="Xoá lọc" onAction="#handleClearFilter" styleClass="btn-ghost"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label text="ĐỔI STATUS:" styleClass="neo-field-label"/>
+        <ComboBox fx:id="cbNewStatus" styleClass="neo-combo" prefWidth="130"/>
+        <Button text="Cập nhật" onAction="#handleUpdateStatus" styleClass="btn-green"/>
+        <Button fx:id="btnDelete" text="Xoá" onAction="#handleDelete" styleClass="btn-danger"/>
+    </HBox>
+
+    <!-- Status bar -->
+    <HBox styleClass="neo-statusbar" alignment="CENTER_LEFT">
+        <Label fx:id="lblEffort" text="Tổng effort: —" styleClass="neo-effort"/>
+    </HBox>
+</VBox>

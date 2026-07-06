@@ -11,15 +11,15 @@ Supports User/Admin roles, login, registration, task creation, filtering, status
 
 | Login | Register |
 |---|---|
-| ![Login](screenshot/Screenshot%202026-07-06%20121624.png) | ![Register](screenshot/Screenshot%202026-07-06%20121710.png) |
+| ![Login](screenshot/login.png) | ![Register](screenshot/register.png) |
 
 | Dashboard (Admin) | Add Task |
 |---|---|
-| ![Dashboard](screenshot/Screenshot%202026-07-06%20121828.png) | ![Add Task](screenshot/Screenshot%202026-07-06%20122305.png) |
+| ![Dashboard](screenshot/dashboard.png) | ![Add Task](screenshot/add_task.png) |
 
 | Task List | User Management |
 |---|---|
-| ![Task List](screenshot/Screenshot%202026-07-06%20122220.png) | ![Users](screenshot/Screenshot%202026-07-06%20122243.png) |
+| ![Task List](screenshot/task_list.png) | ![Users](screenshot/user_list.png) |
 
 ---
 

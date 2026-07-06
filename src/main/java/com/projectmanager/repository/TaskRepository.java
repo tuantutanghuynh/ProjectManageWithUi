@@ -54,7 +54,7 @@ public class TaskRepository {
     //----SELECT ALL-------------------------------------
     public List<Task> findAll() {
         List<Task> list = new ArrayList<>();
-        String sql = "SELECT * FROM Tasks ORDER BY"
+        String sql = "SELECT * FROM Tasks ORDER BY "
                 + "CASE Priority WHEN 'HIGH' THEN 1 WHEN 'MEDIUM' THEN 2 ELSE 3 END, TaskId";
         try (Statement st = conn.createStatement()) {
             ResultSet rs = st.executeQuery(sql);

@@ -50,11 +50,6 @@
                        styleClass="neo-input" maxWidth="Infinity"/>
         </VBox>
 
-        <VBox spacing="4">
-            <Label text="VAI TRÒ" styleClass="neo-field-label"/>
-            <ComboBox fx:id="cbRole" styleClass="neo-combo" maxWidth="Infinity"/>
-        </VBox>
-
         <Label fx:id="lblMessage" text="" wrapText="true" maxWidth="296"
                style="-fx-font-size: 12px; -fx-font-style: italic;"/>
 

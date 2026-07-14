@@ -21,27 +21,24 @@ public class AuthService {
         return u;
     }
 
-    //register: trả về user nếu đăng ký thành công, trả về null nếu thất bại
-    public boolean register(String username, String password, String confirmPassword, String email, String role){
-        
+    //register: role luon la "user", chi admin moi duoc nang quyen sau
+    public boolean register(String username, String password, String confirmPassword, String email){
         Validator.requireNonBlank(username, "Username");
-        Validator.requireMinLength(username, "Username",3);
+        Validator.requireMinLength(username, "Username", 3);
         Validator.requireNonBlank(password, "Mat khau");
         Validator.requireMinLength(password, "Mat khau", 6);
 
-        if(!password.equals(confirmPassword)){
-            throw new IllegalArgumentException("Mat khau xac nhan khong khop. ");
-        }
+        if (!password.equals(confirmPassword))
+            throw new IllegalArgumentException("Mat khau xac nhan khong khop.");
 
-        if(userRepo.existByUsername(username)){
-            throw new IllegalArgumentException("Username \"" + username + "\" da ton tai. ");
-        }
+        if (userRepo.existByUsername(username))
+            throw new IllegalArgumentException("Username \"" + username + "\" da ton tai.");
 
         User u = new User();
         u.username = username;
         u.passwordHash = PasswordHasher.hash(password);
         u.email = (email == null) ? "" : email.trim();
-        u.role = (role == null || role.isBlank())? "user" : role;
+        u.role   = "user";
         u.status = true;
 
         return userRepo.insert(u);

@@ -11,19 +11,16 @@ import javafx.scene.control.*;
 
 public class RegisterController implements Initializable {
 
-    @FXML private TextField        txtUsername;
-    @FXML private PasswordField    txtPassword;
-    @FXML private PasswordField    txtConfirm;
-    @FXML private TextField        txtEmail;
-    @FXML private ComboBox<String> cbRole;
-    @FXML private Label            lblMessage;
+    @FXML private TextField     txtUsername;
+    @FXML private PasswordField txtPassword;
+    @FXML private PasswordField txtConfirm;
+    @FXML private TextField     txtEmail;
+    @FXML private Label         lblMessage;
 
     private final AuthService authService = new AuthService();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cbRole.getItems().addAll("user", "admin");
-        cbRole.getSelectionModel().selectFirst();   // "user" mac dinh
         lblMessage.setText("");
     }
 
@@ -34,8 +31,7 @@ public class RegisterController implements Initializable {
                 txtUsername.getText().trim(),
                 txtPassword.getText(),
                 txtConfirm.getText(),
-                txtEmail.getText().trim(),
-                cbRole.getValue()
+                txtEmail.getText().trim()
             );
             if (ok) {
                 showMsg("Tao tai khoan thanh cong. Vui long dang nhap.", true);
@@ -56,7 +52,6 @@ public class RegisterController implements Initializable {
     private void clearForm() {
         txtUsername.clear(); txtPassword.clear();
         txtConfirm.clear();  txtEmail.clear();
-        cbRole.getSelectionModel().selectFirst();
     }
 
     private void showMsg(String msg, boolean success) {
